@@ -1,0 +1,18 @@
+services:
+  backend:
+    container_name: backend
+    build: ./backend
+    volumes:
+      - ./backend:/app
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    volumes:
+      - ./frontend:/app
+  database:
+    build: ./docker/database
+    volumes:
+      - database_data:/var/lib/postgresql/data
+
+volumes:
+  database_data:
