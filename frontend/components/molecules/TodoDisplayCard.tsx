@@ -1,17 +1,15 @@
 import { BasicCard } from "../atom/BasicCard";
 import { InputArea } from "../atom/BasicInputArea";
 import TextArea from "../atom/BasicTextArea";
-import BasicButton from "../atom/BasicButton";
 
-export default function TodoInputCard() {
+export default function TodoDisplayCard() {
   return (
     <div className="max-w-md mx-auto">
       <BasicCard>
         <div className="mb-1">
-          <InputArea />
+          <InputArea disabled={true} />
         </div>
-        <TextArea />
-        <BasicButton>Submit</BasicButton>
+        <TextArea disabled={true} />
       </BasicCard>
     </div>
   );
