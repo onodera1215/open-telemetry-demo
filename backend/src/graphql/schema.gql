@@ -17,14 +17,23 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Query {
-  todo(id: Float!): Todo!
+  todo(id: Int!): Todo
 }
 
 type Mutation {
   createTodo(input: TodoInput!): Todo!
+  deleteTodo(id: Int!): Todo!
+  updateTodo(input: UpdateTodoInput!): Todo!
 }
 
 input TodoInput {
   title: String!
   description: String
+}
+
+input UpdateTodoInput {
+  id: Int!
+  title: String!
+  description: String
+  completed: Boolean!
 }
