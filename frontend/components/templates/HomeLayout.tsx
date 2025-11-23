@@ -1,12 +1,6 @@
-import TodoInputCard from "../molecules/TodoInputCard";
+import { Todo } from "@/graphql/documents/graphql";
+import TodoForm from "../organizations/TodoForm";
 
-export default async function HomeLayout() {
-  return (
-    <section className="container mx-auto p-4">
-      <h1 className="mx-auto text-2xl font-bold mb-4 text-center">
-        Your Tasks.
-      </h1>
-      <TodoInputCard />
-    </section>
-  );
+export default async function HomeLayout({ todos }: { todos: Todo[] }) {
+  return <TodoForm todos={todos} />;
 }

@@ -9,6 +9,7 @@ export default function BasicButton({
 }) {
   return (
     <button
+      type="button"
       className="bg-primary text-fc-secondary px-4 py-2 rounded transition cursor-pointer"
       {...props}
     >
