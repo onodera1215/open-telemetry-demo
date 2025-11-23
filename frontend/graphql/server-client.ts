@@ -1,12 +1,17 @@
 "use server";
+
 import { Client, cacheExchange, fetchExchange } from "urql";
 
-export default async function urqlServerClient() {
+export async function getServerClient() {
   return new Client({
-    url: "backend:3000/graphql",
+    url: "http://backend:3000/graphql",
     exchanges: [cacheExchange, fetchExchange],
     fetchOptions: () => ({
       cache: "no-store",
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
     }),
   });
 }

@@ -14,9 +14,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+    "\n  mutation CreateTodoMutation($input: TodoInput!) {\n    createTodo(input: $input) {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n": typeof types.CreateTodoMutationDocument,
     "\n  query GetTodos {\n    todos {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n": typeof types.GetTodosDocument,
 };
 const documents: Documents = {
+    "\n  mutation CreateTodoMutation($input: TodoInput!) {\n    createTodo(input: $input) {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n": types.CreateTodoMutationDocument,
     "\n  query GetTodos {\n    todos {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n": types.GetTodosDocument,
 };
 
@@ -34,6 +36,10 @@ const documents: Documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation CreateTodoMutation($input: TodoInput!) {\n    createTodo(input: $input) {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n"): (typeof documents)["\n  mutation CreateTodoMutation($input: TodoInput!) {\n    createTodo(input: $input) {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
