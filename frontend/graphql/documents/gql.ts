@@ -15,10 +15,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
     "\n  mutation CreateTodoMutation($input: TodoInput!) {\n    createTodo(input: $input) {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n": typeof types.CreateTodoMutationDocument,
+    "\n  mutation DeleteTodoMutation($id: Int!) {\n    deleteTodo(id: $id) {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n": typeof types.DeleteTodoMutationDocument,
     "\n  query GetTodos {\n    todos {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n": typeof types.GetTodosDocument,
 };
 const documents: Documents = {
     "\n  mutation CreateTodoMutation($input: TodoInput!) {\n    createTodo(input: $input) {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n": types.CreateTodoMutationDocument,
+    "\n  mutation DeleteTodoMutation($id: Int!) {\n    deleteTodo(id: $id) {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n": types.DeleteTodoMutationDocument,
     "\n  query GetTodos {\n    todos {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n": types.GetTodosDocument,
 };
 
@@ -40,6 +42,10 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation CreateTodoMutation($input: TodoInput!) {\n    createTodo(input: $input) {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n"): (typeof documents)["\n  mutation CreateTodoMutation($input: TodoInput!) {\n    createTodo(input: $input) {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation DeleteTodoMutation($id: Int!) {\n    deleteTodo(id: $id) {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteTodoMutation($id: Int!) {\n    deleteTodo(id: $id) {\n      id\n      title\n      description\n      completed\n      createdAt\n      updatedAt\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

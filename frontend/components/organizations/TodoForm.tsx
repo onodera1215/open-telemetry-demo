@@ -1,10 +1,10 @@
 
 "use client";
 import TodoInputCard from "../molecules/TodoInputCard";
-import TodoListCard from "../molecules/TodoListCard";
 import { useActionState } from "react";
 import createTodoAction from "@/app/action";
 import { Todo } from "@/graphql/documents/graphql";
+import TodoDisplayCard from "../molecules/TodoDisplayCard";
 
 export default function TodoForm({ todos }: { todos: Todo[] }) {
   const [state, action] = useActionState(createTodoAction, todos);
@@ -14,11 +14,17 @@ export default function TodoForm({ todos }: { todos: Todo[] }) {
         Your Tasks.
       </h1>
       <form action={action}>
+        <input type="hidden" name="action" value="create" />
         <TodoInputCard />
       </form>
-      <div>
-        <TodoListCard todos={state} />
-      </div>
+      {state.map(todo => (
+        <div className="my-2" key={todo.id}>
+          <form action={action}>
+            <input type="hidden" name="action" value="delete" />
+            <TodoDisplayCard todo={todo} />
+          </form>
+        </div>
+      ))}
     </section>
   );
 }

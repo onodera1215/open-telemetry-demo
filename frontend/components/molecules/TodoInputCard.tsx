@@ -22,10 +22,15 @@ export default function TodoInputCard() {
     <div className="max-w-md mx-auto">
       <BasicCard>
         <div className="mb-1">
+          <p className="font-bold">Title</p>
           <InputArea name="title" />
+          <p className="font-bold">Description</p>
+          <TextArea name="description" />
         </div>
-        <TextArea name="description" />
-        <BasicButton>add</BasicButton>
+
+        <div className="flex justify-end ">
+          <BasicButton>add</BasicButton>
+        </div>
       </BasicCard>
     </div >
   );

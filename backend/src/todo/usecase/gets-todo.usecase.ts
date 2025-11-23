@@ -8,7 +8,7 @@ export class GetsTodoUseCase {
   async execute(): Promise<Todo[]> {
     return await this.prismaService.todo.findMany({
       orderBy: {
-        completed: 'desc',
+        createdAt: 'desc',
       },
     });
   }
