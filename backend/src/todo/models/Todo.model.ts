@@ -2,18 +2,21 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class Todo {
-  @Field((type) => Int)
+  @Field(() => Int)
   id: number;
 
   @Field()
   title: string;
 
-  @Field({ nullable: true })
-  description?: string;
+  @Field(() => String, { nullable: true })
+  description?: string | null;
 
   @Field()
   completed: boolean;
 
   @Field()
   createdAt: Date;
+
+  @Field()
+  updatedAt: Date;
 }

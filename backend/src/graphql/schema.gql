@@ -8,6 +8,7 @@ type Todo {
   description: String
   completed: Boolean!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """
@@ -17,4 +18,13 @@ scalar DateTime
 
 type Query {
   todo(id: Float!): Todo!
+}
+
+type Mutation {
+  createTodo(input: TodoInput!): Todo!
+}
+
+input TodoInput {
+  title: String!
+  description: String
 }

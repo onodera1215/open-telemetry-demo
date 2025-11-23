@@ -4,6 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TodoModule } from './todo/todo.module';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { join } from 'path';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { join } from 'path';
       autoSchemaFile: join(process.cwd(), 'src/graphql/schema.gql'),
     }),
     TodoModule,
+    PrismaModule,
   ],
 })
 export class AppModule {}
