@@ -6,12 +6,14 @@ import { CreateTodoUseCase } from './usecase/create-todo.usecase';
 import { UpdateTodoInput } from './models/UpdateTodo.input';
 import { DeleteTodoUseCase } from './usecase/delete-todo.usecase';
 import { UpdateTodoUseCase } from './usecase/update-todo.usecase';
+import { GetsTodoUseCase } from './usecase/gets-todo.usecase';
 
 @Resolver(() => Todo)
 export class TodoResolver {
   constructor(
     private readonly createTodoUseCase: CreateTodoUseCase,
     private readonly getTodoUseCase: GetTodoUseCase,
+    private readonly getsTodoUseCase: GetsTodoUseCase,
     private readonly updateTodoUseCase: UpdateTodoUseCase,
     private readonly deleteTodoUseCase: DeleteTodoUseCase,
   ) {}
@@ -38,5 +40,10 @@ export class TodoResolver {
     @Args('id', { type: () => Int! }) id: number,
   ): Promise<Todo | null> {
     return await this.getTodoUseCase.execute(id);
+  }
+
+  @Query(() => [Todo!]!)
+  async todos(): Promise<Todo[]> {
+    return await this.getsTodoUseCase.execute();
   }
 }
