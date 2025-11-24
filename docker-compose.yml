@@ -8,11 +8,25 @@ services:
       - "3333:3000"
     environment:
       - DATABASE_URL=postgres://postgres:postgres@database:5432/demo
+      - OTLP_SERVICE_NAME=backend
+      - OTLP_SERVICE_VERSION=1.0
+      - OTLP_JAEGER_TRACES_ENDPOINT=http://jaeger:4318/v1/traces
+      - OTLP_JAEGER_METRICS_ENDPOINT=http://jaeger:4318/v1/metrics
+    depends_on:
+      - database
+    command: ["bash", "-c", "chmod u+x /app/launch.sh && /app/launch.sh"]
+
   frontend:
     container_name: frontend
     build: ./frontend
     volumes:
       - ./frontend:/app
+    ports:
+      - "8080:3000"
+    depends_on:
+      - backend
+    command: ["bash", "-c", "chmod u+x /app/launch.sh && /app/launch.sh"]
+
   database:
     build: ./docker/database
     environment:
@@ -21,6 +35,12 @@ services:
       - POSTGRES_DB=demo
     volumes:
       - database_data:/var/lib/postgresql/data
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+    environment:
+      - LOG_LEVEL=debug
 
 volumes:
   database_data:

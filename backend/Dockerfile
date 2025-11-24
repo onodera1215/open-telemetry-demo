@@ -10,6 +10,13 @@ RUN apt-get update -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+COPY --chown=node:node . /app
+RUN chmod u+x ./local_launch.sh
 USER node
 
-CMD ["sleep", "infinity"]
+RUN npm ci \
+  && npx prisma deploy \
+  && npx prisma generate \
+  && npm run build
+
+CMD ["npm", "start"]
