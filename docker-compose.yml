@@ -13,6 +13,8 @@ services:
     build: ./frontend
     volumes:
       - ./frontend:/app
+    ports:
+      - "8080:3000"
   database:
     build: ./docker/database
     environment:
@@ -21,6 +23,13 @@ services:
       - POSTGRES_DB=demo
     volumes:
       - database_data:/var/lib/postgresql/data
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "4318:4318"
+    environment:
+      - LOG_LEVEL=debug
 
 volumes:
   database_data:
