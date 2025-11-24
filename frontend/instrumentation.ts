@@ -1,8 +1,5 @@
 import { NodeSDK } from "@opentelemetry/sdk-node";
-import {
-  PeriodicExportingMetricReader,
-  ConsoleMetricExporter,
-} from "@opentelemetry/sdk-metrics";
+import { PeriodicExportingMetricReader } from "@opentelemetry/sdk-metrics";
 import { resourceFromAttributes } from "@opentelemetry/resources";
 import {
   ATTR_SERVICE_NAME,
@@ -10,6 +7,8 @@ import {
 } from "@opentelemetry/semantic-conventions";
 import { SpanStatusCode, Tracer } from "@opentelemetry/api";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";
+import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentations-node";
+import { OTLPMetricExporter } from "@opentelemetry/exporter-metrics-otlp-proto";
 
 export function withSpan<T extends (...args: any[]) => any>(
   tracer: Tracer,
@@ -32,22 +31,27 @@ export function withSpan<T extends (...args: any[]) => any>(
   }) as T;
 }
 
-export const OTEL_SERVICE_NAME = process.env.NEXT_PUBLIC_OTEL_SERVICE_NAME!;
-export const OTEL_SERVICE_VERSION =
-  process.env.NEXT_PUBLIC_OTEL_SERVICE_VERSION!;
-const OTEL_SERVICE_ENDPOINT = process.env.NEXT_PUBLIC_OTEL_SERVICE_ENDPOINT!;
+export const OTLP_SERVICE_NAME = process.env.NEXT_PUBLIC_OTLP_SERVICE_NAME!;
+export const OTLP_SERVICE_VERSION =
+  process.env.NEXT_PUBLIC_OTLP_SERVICE_VERSION!;
+const OTLP_SERVICE_TRACES_ENDPOINT =
+  process.env.NEXT_PUBLIC_OTLP_SERVICE_TRACES_ENDPOINT!;
+const OTLP_SERVICE_METRICS_ENDPOINT =
+  process.env.NEXT_PUBLIC_OTLP_SERVICE_METRICS_ENDPOINT!;
 
 const sdk = new NodeSDK({
   resource: resourceFromAttributes({
-    [ATTR_SERVICE_NAME]: OTEL_SERVICE_NAME,
-    [ATTR_SERVICE_VERSION]: OTEL_SERVICE_VERSION,
+    [ATTR_SERVICE_NAME]: OTLP_SERVICE_NAME,
+    [ATTR_SERVICE_VERSION]: OTLP_SERVICE_VERSION,
   }),
   traceExporter: new OTLPTraceExporter({
-    url: OTEL_SERVICE_ENDPOINT,
-    headers: {},
+    url: OTLP_SERVICE_TRACES_ENDPOINT,
   }),
   metricReader: new PeriodicExportingMetricReader({
-    exporter: new ConsoleMetricExporter(),
+    exporter: new OTLPMetricExporter({
+      url: OTLP_SERVICE_METRICS_ENDPOINT,
+    }),
   }),
+  instrumentations: [getNodeAutoInstrumentations()],
 });
 sdk.start();

@@ -1,12 +1,12 @@
 "use server";
 
 import { Todo } from "@/graphql/documents/graphql";
-import createTodoFeature from "./features/create-todo.feature";
-import deleteTodoFeature from "./features/delete-todo.feature";
+import createTodoFeature from "../features/create-todo.feature";
+import deleteTodoFeature from "../features/delete-todo.feature";
 import { trace } from "@opentelemetry/api";
 import {
-  OTEL_SERVICE_NAME,
-  OTEL_SERVICE_VERSION,
+  OTLP_SERVICE_NAME,
+  OTLP_SERVICE_VERSION,
   withSpan,
 } from "@/instrumentation";
 
@@ -15,7 +15,7 @@ enum ActionType {
   DELETE = "delete",
 }
 
-const tracer = trace.getTracer(OTEL_SERVICE_NAME, OTEL_SERVICE_VERSION);
+const tracer = trace.getTracer(OTLP_SERVICE_NAME, OTLP_SERVICE_VERSION);
 
 async function _action(prevState: Todo[], formData: FormData): Promise<Todo[]> {
   // 状態変更の分岐

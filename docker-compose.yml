@@ -8,6 +8,10 @@ services:
       - "3333:3000"
     environment:
       - DATABASE_URL=postgres://postgres:postgres@database:5432/demo
+      - OTLP_SERVICE_NAME=backend
+      - OTLP_SERVICE_VERSION=1.0
+      - OTLP_JAEGER_TRACES_ENDPOINT=http://jaeger:4318/v1/traces
+      - OTLP_JAEGER_METRICS_ENDPOINT=http://jaeger:4318/v1/metrics
   frontend:
     container_name: frontend
     build: ./frontend
