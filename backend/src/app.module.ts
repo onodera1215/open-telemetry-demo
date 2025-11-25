@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TodoModule } from './todo/todo.module';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { join } from 'path';
 import { PrismaModule } from './prisma/prisma.module';
+import { SimpleLoggerMiddleware } from './middleware/simple-logger.middleware';
 
 @Module({
   imports: [
@@ -18,4 +19,8 @@ import { PrismaModule } from './prisma/prisma.module';
     PrismaModule,
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(SimpleLoggerMiddleware).forRoutes('*');
+  }
+}
