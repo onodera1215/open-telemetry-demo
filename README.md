@@ -49,8 +49,13 @@ npm start
 
 で Todo アプリを確認出来るようになります。
 
+https://github.com/user-attachments/assets/1935a176-a933-4655-8c58-607738369fca
+
 ## JeagerUI の起動
 
 [http://localhost:16686](http://localhost:16686)
 
 で JaegerUI を確認できます。Todo アプリで何か操作を行っていればテレメトリーデータを閲覧できます。
+
+https://github.com/user-attachments/assets/943c9ede-2ccb-43ad-bc5e-51b129d68ead
+
