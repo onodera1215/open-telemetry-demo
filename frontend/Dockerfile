@@ -2,11 +2,10 @@ FROM node:24
 
 WORKDIR /app
 
-RUN apt-get update -y \
-  && mkdir -p /app/.next \
-  && chown -R node:node /app/.next
+RUN apt-get update -y 
 
 COPY --chown=node:node . /app
+RUN chown -R node:node /app
 
 USER node
 RUN npm ci \
