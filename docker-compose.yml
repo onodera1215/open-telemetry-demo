@@ -27,7 +27,6 @@ services:
       - "8080:3000"
     depends_on:
       - backend
-    command: ["bash", "-c", "chmod u+x /app/launch.sh && /app/launch.sh"]
 
   database:
     build: ./docker/database
