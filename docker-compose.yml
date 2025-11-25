@@ -16,6 +16,12 @@ services:
     depends_on:
       - database
     command: ["bash", "-c", "chmod u+x /app/launch.sh && /app/launch.sh"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/graphql"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 30s
 
   frontend:
     container_name: frontend
