@@ -33,6 +33,8 @@ npm start
 以下のコマンドを実行してください。
 
 ```bash
+# フロントエンドコンテナに入る
+docker compose exec frontend bash
 # パッケージインストール
 npm ci
 # アプリケーションビルド
