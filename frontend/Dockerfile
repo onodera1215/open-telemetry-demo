@@ -5,7 +5,7 @@ WORKDIR /app
 RUN apt-get update -y 
 
 COPY --chown=node:node . /app
-RUN chmod u+x ./local_launch.sh
+RUN chown -R node:node /app
 
 USER node
 RUN npm ci \

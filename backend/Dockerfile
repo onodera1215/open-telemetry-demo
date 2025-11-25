@@ -4,6 +4,7 @@ WORKDIR /app
 
 
 RUN apt-get update -y \
+  && apt-get install -y iputils-ping net-tools \
   && chown node:node /app \
   && npm i -g @nestjs/cli \
   && apt-get install -y xdg-utils \
@@ -11,12 +12,7 @@ RUN apt-get update -y \
   && rm -rf /var/lib/apt/lists/*
 
 COPY --chown=node:node . /app
-RUN chmod u+x ./local_launch.sh
+RUN chmod u+x ./launch.sh
 USER node
 
-RUN npm ci \
-  && npx prisma deploy \
-  && npx prisma generate \
-  && npm run build
-
-CMD ["npm", "start"]
+CMD ["./launch.sh"]
