@@ -11,7 +11,37 @@ git clone 後プロジェクトルートで
 docker compose up -d
 ```
 
-を実行してください。
+### バックエンド起動
+
+以下のコマンドを実行してください
+
+```bash
+# バックエンドコンテナに入る
+docker compose exec backend bash
+# パッケージインストール
+npm ci
+# マイグレーション実行
+npx prisma@6 migrate deploy
+# アプリケーションビルド
+npm run build
+# アプリケーション起動
+npm start
+```
+
+### フロントエンド起動
+
+以下のコマンドを実行してください。
+
+```bash
+# パッケージインストール
+npm ci
+# アプリケーションビルド
+npm run build
+# アプリケーション起動
+npm start
+```
+
+## Todo アプリケーションにアクセス
 
 [http://localhost:8080](http://localhost:8080)
 
