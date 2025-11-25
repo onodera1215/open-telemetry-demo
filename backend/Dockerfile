@@ -4,7 +4,7 @@ WORKDIR /app
 
 
 RUN apt-get update -y \
-  && apt-get install -y curl \
+  && apt-get install iputils-ping net-tools \
   && chown node:node /app \
   && npm i -g @nestjs/cli \
   && apt-get install -y xdg-utils \
