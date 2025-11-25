@@ -4,6 +4,7 @@ services:
     build: ./backend
     volumes:
       - ./backend:/app
+      - /app/node_modules
     ports:
       - "3333:3000"
     environment:
@@ -17,8 +18,12 @@ services:
     build: ./frontend
     volumes:
       - ./frontend:/app
+      - /app/node_modules
     ports:
       - "8080:3000"
+    depends_on:
+      - backend
+
   database:
     build: ./docker/database
     environment:

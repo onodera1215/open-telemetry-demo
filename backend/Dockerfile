@@ -10,6 +10,8 @@ RUN apt-get update -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+COPY --chown=node:node . /app
+RUN chmod u+x ./launch.sh
 USER node
 
-CMD ["sleep", "infinity"]
+CMD ["./launch.sh"]
