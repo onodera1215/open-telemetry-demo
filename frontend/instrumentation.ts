@@ -41,6 +41,7 @@ const OTLP_SERVICE_METRICS_ENDPOINT =
 
 let sdk: NodeSDK | null = null;
 export async function register() {
+  console.info("Registering OpenTelemetry SDK...");
   if (sdk) {
     return;
   }
