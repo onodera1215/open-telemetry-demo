@@ -31,13 +31,11 @@ export function withSpan<T extends (...args: any[]) => any>(
   }) as T;
 }
 
-export const OTLP_SERVICE_NAME = process.env.NEXT_PUBLIC_OTLP_SERVICE_NAME!;
-export const OTLP_SERVICE_VERSION =
-  process.env.NEXT_PUBLIC_OTLP_SERVICE_VERSION!;
-const OTLP_SERVICE_TRACES_ENDPOINT =
-  process.env.NEXT_PUBLIC_OTLP_SERVICE_TRACES_ENDPOINT!;
+export const OTLP_SERVICE_NAME = process.env.OTLP_SERVICE_NAME!;
+export const OTLP_SERVICE_VERSION = process.env.OTLP_SERVICE_VERSION!;
+const OTLP_SERVICE_TRACES_ENDPOINT = process.env.OTLP_SERVICE_TRACES_ENDPOINT!;
 const OTLP_SERVICE_METRICS_ENDPOINT =
-  process.env.NEXT_PUBLIC_OTLP_SERVICE_METRICS_ENDPOINT!;
+  process.env.OTLP_SERVICE_METRICS_ENDPOINT!;
 
 let sdk: NodeSDK | null = null;
 export async function register() {
